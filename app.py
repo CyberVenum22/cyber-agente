@@ -29,7 +29,7 @@ if prompt := st.chat_input("Digite seu comando..."):
         try:
             # Criando a configuração de forma explícita
             response = client.models.generate_content(
-                model="gemini-2.0-flash",
+                model="gemini-1.5-flash",
                 contents=[prompt],  # Transformado em lista para evitar erro de tipo
                 config={
                     'system_instruction': "Você é um Especialista Sênior em Cibersegurança, Mentor Técnico e Hacker Ético. Responda de forma técnica e direta.",
