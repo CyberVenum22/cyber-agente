@@ -26,11 +26,24 @@ if prompt := st.chat_input("Digite seu comando..."):
         st.markdown(prompt)
 
     # Chamada para o Gemini (com a sua Persona)
+    # Chamada para o Gemini
     with st.chat_message("assistant"):
-        response = client.models.generate_content(
-            model="gemini-2.0-flash", # Use a estável para evitar erros de cota
-            contents=prompt,
-            config={'system_instruction': "Você é um Especialista Sênior em Cibersegurança..."}
-        )
-        st.markdown(response.text)
-        st.session_state.messages.append({"role": "assistant", "content": response.text})
+        try:
+            # Criando a configuração de forma explícita
+            response = client.models.generate_content(
+                model="gemini-2.0-flash",
+                contents=[prompt],  # Transformado em lista para evitar erro de tipo
+                config={
+                    'system_instruction': "Você é um Especialista Sênior em Cibersegurança, Mentor Técnico e Hacker Ético. Responda de forma técnica e direta.",
+                    'temperature': 0.2,
+                }
+            )
+            
+            if response.text:
+                st.markdown(response.text)
+                st.session_state.messages.append({"role": "assistant", "content": response.text})
+            else:
+                st.error("O modelo não retornou texto. Verifique os filtros de segurança.")
+                
+        except Exception as e:
+            st.error(f"Erro na API: {str(e)}")
