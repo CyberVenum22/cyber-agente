@@ -27,15 +27,15 @@ if prompt := st.chat_input("Solicitar análise de segurança..."):
     with st.chat_message("user"):
         st.markdown(prompt)
 
-    # 5. Resposta do Agente
+  # No bloco de resposta do assistente, altere para:
     with st.chat_message("assistant"):
         try:
-            # Modelo estável para evitar 404 e 429
+            # Forçando o caminho completo do modelo
             response = client.models.generate_content(
-                model="gemini-1.5-flash",
+                model="models/gemini-1.5-flash", # Adicionado o prefixo models/
                 contents=[prompt],
                 config={
-                    'system_instruction': "Você é um Especialista Sênior em Cibersegurança e Hacker Ético. Responda de forma técnica, honesta e direta.",
+                    'system_instruction': "Você é um Especialista Sênior em Cibersegurança. Responda de forma técnica e direta.",
                     'temperature': 0.1
                 }
             )
