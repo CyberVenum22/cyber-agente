@@ -24,15 +24,16 @@ if prompt := st.chat_input("Digite seu comando..."):
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
         st.markdown(prompt)
-  # Chamada para o Gemini
+ # Chamada para o Gemini
     with st.chat_message("assistant"):
         try:
+            # Usando o nome direto que a biblioteca v1.0+ espera
             response = client.models.generate_content(
-                model="gemini-2.0-flash-exp",  # Nome técnico completo
-                contents=[prompt],
+                model="gemini-2.0-flash", 
+                contents=prompt,
                 config={
                     'system_instruction': "Você é um Especialista Sênior em Cibersegurança. Responda de forma técnica e direta.",
-                    'temperature': 0.2
+                    'temperature': 0.1,
                 }
             )
             
@@ -43,5 +44,4 @@ if prompt := st.chat_input("Digite seu comando..."):
                 st.error("O modelo não retornou resposta.")
                 
         except Exception as e:
-            # Se o erro 404 persistir, tentaremos o modelo 2.0 que é o padrão da lib nova
             st.error(f"Erro na API: {str(e)}")
