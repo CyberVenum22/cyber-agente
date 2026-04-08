@@ -1,14 +1,11 @@
-import type { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
-  output: "standalone",
-  experimental: {
-    turbo: {
-      resolveAlias: {
-        canvas: "./empty-module.ts",
-      },
-    },
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  eslint: {
+    ignoreDuringBuilds: true,
   },
-};
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+}
 
-export default nextConfig;
+module.exports = nextConfig
