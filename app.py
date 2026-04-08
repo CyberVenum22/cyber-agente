@@ -23,7 +23,7 @@ if "GEMINI_API_KEY" not in st.secrets:
 
 genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
 model = genai.GenerativeModel(
-    model_name="gemini-1.5-flash",
+    model_name="models/gemini-1.5-flash-latest", # O sufixo -latest força a versão estável
     system_instruction="Você é um Especialista Sênior em Cibersegurança. Responda de forma técnica e direta."
 )
 
