@@ -29,7 +29,7 @@ if prompt := st.chat_input("Digite seu comando..."):
         try:
             # Usando o nome direto que a biblioteca v1.0+ espera
             response = client.models.generate_content(
-                model="gemini-2.0-flash", 
+                model="gemini-1.5-flash", 
                 contents=prompt,
                 config={
                     'system_instruction': "Você é um Especialista Sênior em Cibersegurança. Responda de forma técnica e direta.",
