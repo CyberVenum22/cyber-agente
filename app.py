@@ -24,8 +24,6 @@ if prompt := st.chat_input("Digite seu comando..."):
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
         st.markdown(prompt)
-
-    # Chamada para o Gemini (com a sua Persona)
     # Chamada para o Gemini
     with st.chat_message("assistant"):
         try:
